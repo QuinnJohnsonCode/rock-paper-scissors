@@ -30,3 +30,6 @@ function playRound(playerSelection, computerSelection) {
     return "You Win! " + playerSelection + " beats " + computerSelection;
 }
 
+const playerSelection = "Rock";
+const computerSelection = getComputerChoice();
+console.log(playRound(playerSelection, computerSelection));
