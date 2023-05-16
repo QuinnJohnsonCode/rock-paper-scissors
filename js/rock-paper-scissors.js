@@ -7,3 +7,26 @@ function getComputerChoice() {
     return options[randomSelection];
 }
 
+function playRound(playerSelection, computerSelection) {
+    // normalize to lowercase
+    let playerSelectionLower = playerSelection.toLowerCase();
+    let computerSelectionLower = computerSelection.toLowerCase();
+    
+    // check for a draw
+    if (playerSelection === computerSelection) {
+        return "Draw!";
+    }
+
+    // check for computer-sided wins
+    let computerWin = (playerSelectionLower === "rock" && computerSelectionLower === "paper") ||
+                      (playerSelectionLower === "paper" && computerSelectionLower === "scissors") ||
+                      (playerSelectionLower === "scissors" && computerSelectionLower === "rock");
+    
+    if (computerWin) {
+        return "You Lose! " + computerSelection + " beats " + playerSelection;
+    }
+
+    // otherwise, the player wins
+    return "You Win! " + playerSelection + " beats " + computerSelection;
+}
+
