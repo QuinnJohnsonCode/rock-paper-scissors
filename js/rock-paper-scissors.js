@@ -22,12 +22,8 @@ function playRound(playerSelection, computerSelection) {
                       (playerSelectionLower === "paper" && computerSelectionLower === "scissors") ||
                       (playerSelectionLower === "scissors" && computerSelectionLower === "rock");
     
-    if (computerWin) {
-        return "You Lose! " + computerSelection + " beats " + playerSelection;
-    }
-
-    // otherwise, the player wins
-    return "You Win! " + playerSelection + " beats " + computerSelection;
+    // true / false
+    return computerWin;
 }
 
 function getPlayerSelection() {
@@ -50,11 +46,24 @@ function getPlayerSelection() {
     return OPTIONS[playerSelection];
 }
 
+function displayWinner(playerWins, computerWins) {
+    // Display winner
+    if (playerWins > computerWins) {
+        console.log("The player wins!");
+    }
+    else if (computerWins > playerWins) {
+        console.log("The computer wins. :(");
+    }
+    else {
+        console.log("It's a tie!");
+    }
+}
+
 function game() {
     let playerWins = 0;
+    let computerWins = 0;
     let computerSelection, playerSelection;
     const NUMBER_OF_GAMES = 5;
-    
 
     // loop through the desired number of games
     for (let i = 0; i < NUMBER_OF_GAMES; i++) {
@@ -64,9 +73,19 @@ function game() {
 
         // get the computer's selection
         computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-
+        
+        // if playRound returns true, the computer wins
+        if (playRound(playerSelection, computerSelection)) {
+            console.log("You Win! " + playerSelection + " beats " + computerSelection);
+            playerWins++;
+        }
+        else {
+            console.log("You Lose! " + computerSelection + " beats " + playerSelection);
+            computerWins++;
+        }
     }
+
+    displayWinner(playerWins, computerWins);
 }
 
 game();
