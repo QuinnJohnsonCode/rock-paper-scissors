@@ -14,7 +14,7 @@ function playRound(playerSelection, computerSelection) {
     
     // check for a draw
     if (playerSelection === computerSelection) {
-        return "Draw!";
+        return 2;
     }
 
     // check for computer-sided wins
@@ -23,7 +23,7 @@ function playRound(playerSelection, computerSelection) {
                       (playerSelectionLower === "scissors" && computerSelectionLower === "rock");
     
     // true / false
-    return computerWin;
+    return computerWin ? 0 : 1;
 }
 
 function getPlayerSelection() {
@@ -74,14 +74,17 @@ function game() {
         // get the computer's selection
         computerSelection = getComputerChoice();
         
-        // if playRound returns true, the computer wins
-        if (playRound(playerSelection, computerSelection)) {
+        // if playRound returns 0, the computer wins
+        if(playRound(playerSelection, computerSelection) === 0) {
+            console.log("You Lose! " + computerSelection + " beats " + playerSelection);
+            computerWins++;
+        }
+        else if (playRound(playerSelection, computerSelection) === 1) {
             console.log("You Win! " + playerSelection + " beats " + computerSelection);
             playerWins++;
         }
         else {
-            console.log("You Lose! " + computerSelection + " beats " + playerSelection);
-            computerWins++;
+            console.log("Draw!");
         }
     }
 
