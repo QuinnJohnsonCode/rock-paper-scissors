@@ -1,10 +1,10 @@
 function getComputerChoice() {
     // randomSelection is an integer between 0 and 2
     let randomSelection = Math.floor(Math.random() * 3);
-    const options = ["Rock", "Paper", "Scissors"]
+    const OPTIONS = ["Rock", "Paper", "Scissors"];
 
     // make choice based on the randomSelection
-    return options[randomSelection];
+    return OPTIONS[randomSelection];
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -30,6 +30,43 @@ function playRound(playerSelection, computerSelection) {
     return "You Win! " + playerSelection + " beats " + computerSelection;
 }
 
-const playerSelection = "Rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function getPlayerSelection() {
+    const OPTIONS = ["Rock", "Paper", "Scissors"];
+
+    // get player input 
+    // 0 for rock, 1 for paper, 2 for scissors
+    while (true) {
+        playerSelection = parseInt(prompt("Enter 0 for Rock, 1 for Paper, 2 for Scissors: "));
+
+        // verify playerSelection is within the range of 0-2
+        if (playerSelection < 0 || playerSelection > 2) {
+            console.log("Please input a value between 0 and 2.");
+            continue;
+        }
+        
+        break;
+    }
+
+    return OPTIONS[playerSelection];
+}
+
+function game() {
+    let playerWins = 0;
+    let computerSelection, playerSelection;
+    const NUMBER_OF_GAMES = 5;
+    
+
+    // loop through the desired number of games
+    for (let i = 0; i < NUMBER_OF_GAMES; i++) {
+
+        // get the player's selection
+        playerSelection = getPlayerSelection();
+
+        // get the computer's selection
+        computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+
+    }
+}
+
+game();
