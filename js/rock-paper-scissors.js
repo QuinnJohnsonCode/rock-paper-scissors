@@ -1,7 +1,10 @@
 function getComputerChoice() {
     let choice;
+
+    // randomSelection is an integer between 0 and 2
     let randomSelection = Math.floor(Math.random() * 3);
 
+    // change choice based on the randomSelection
     switch (randomSelection) {
         case 0:
             choice = "Rock";
@@ -16,5 +19,3 @@ function getComputerChoice() {
 
     return choice;
 }
-
-console.log(getComputerChoice());
