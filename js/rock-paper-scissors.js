@@ -46,40 +46,55 @@ function getPlayerSelection() {
     return OPTIONS[playerSelection];
 }
 
-function displayWinner(playerWins, computerWins) {
+function generateWinner(playerWins, computerWins) {
     // Display winner
     if (playerWins > computerWins) {
-        console.log("The player wins!");
+        return ("The player wins!");
     }
     else if (computerWins > playerWins) {
-        console.log("The computer wins. :(");
+        return ("The computer wins. :(");
     }
-    else {
-        console.log("It's a tie!");
-    }
+        
+    return ("It's a tie!");
 }
 
-function displayRoundWinner(gameResult, computerSelection, playerSelection) {
+function generateRoundWinner(gameResult, computerSelection, playerSelection) {
     if(gameResult === 0) {
-        console.log("You Lose! " + computerSelection + " beats " + playerSelection);
+        return ("You Lose! " + computerSelection + " beats " + playerSelection);
     }
     else if (gameResult === 1) {
-        console.log("You Win! " + playerSelection + " beats " + computerSelection);
+        return ("You Win! " + playerSelection + " beats " + computerSelection);
     }
-    else {
-        console.log("Draw!");
+    
+    return ("Draw!");
+}
+
+function generateEmoji(selection) {
+    const selectionLower = selection.toLowerCase();
+    if (selectionLower === "rock") {
+        return "🪨";
     }
+    else if (selectionLower === "paper") {
+        return "📜";
+    }
+
+    return "✂️";
 }
 
 function game() {
     let initRound = function () {
+        // update selection emoji
+        playerEmoji.innerText = generateEmoji(playerSelection);
+        computerEmoji.innerText = generateEmoji(computerSelection);
+        // calculate result
         gameResult = playRound(playerSelection, computerSelection);
+        // end the round
         endRound();
     }
 
     let endRound = function () {
         // display winner of the round
-        displayRoundWinner(gameResult, computerSelection, playerSelection);
+        roundText.innerText = generateRoundWinner(gameResult, computerSelection, playerSelection);
         // update scores
         playerWins = gameResult === 1 ? playerWins + 1 : playerWins;
         computerWins = gameResult === 0 ? computerWins + 1 : computerWins;
@@ -98,16 +113,24 @@ function game() {
         paperButton.removeEventListener("click", initRound);
         scissorsButton.removeEventListener("click", initRound);
         // display winner
-        displayWinner(playerWins, computerWins);
+        winnerText.innerText = generateWinner(playerWins, computerWins);
     };
 
     let playerWins = 0;
     let computerWins = 0;
     let draws = 0;
-    let playerSelection = "Rock";
+    let playerSelection = "";
     let computerSelection = getComputerChoice();
     let gameResult; // 0 - computer, 1 - player, 2 - draw
     const NUMBER_OF_GAMES = 5;
+
+    // get emoji representations of selections
+    const playerEmoji = document.getElementById("player-selection");
+    const computerEmoji = document.getElementById("computer-selection");
+
+    // get round and winner text from DOM
+    const roundText = document.getElementById("round-text");
+    const winnerText = document.getElementById("winner-text");
 
     // get buttons from DOM
     const rockButton = document.getElementById("rock-button");
