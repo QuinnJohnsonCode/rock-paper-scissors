@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;400;700&display=swap');
+
+body {
+    font-family: Roboto, sans-serif;
+    height: 100vh;
+    margin: 0;
+
+    background-color: #121212;
+    color: #A5C9CA;
+    align-items: center;
+    justify-content: center;
+
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+footer {
+    margin-bottom: 10px;
+}
+
+button {
+    font-size: 5rem;
+    width: 200px;
+    margin: 5px;
+}
+
+/* CSS src = https://getcssscan.com/css-buttons-examples */
+button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+}
+
+button:hover,
+button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+.button-container,.selection-container {
+    display: flex;
+    padding: 50px 0;
+}
+
+.selection-container {
+    font-size: 10rem;
+    gap: 5rem;
+    line-height: 100px;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: auto;
+}
+
+#player-selection,#computer-selection {
+    color: #fff;
+}
+
+#round-text {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 35px 0;
+}
