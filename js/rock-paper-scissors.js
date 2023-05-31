@@ -59,36 +59,70 @@ function displayWinner(playerWins, computerWins) {
     }
 }
 
+function displayRoundWinner(gameResult, computerSelection, playerSelection) {
+    if(gameResult === 0) {
+        console.log("You Lose! " + computerSelection + " beats " + playerSelection);
+    }
+    else if (gameResult === 1) {
+        console.log("You Win! " + playerSelection + " beats " + computerSelection);
+    }
+    else {
+        console.log("Draw!");
+    }
+}
+
 function game() {
-    let playerWins = 0;
-    let computerWins = 0;
-    let computerSelection, playerSelection;
-    const NUMBER_OF_GAMES = 5;
-
-    // loop through the desired number of games
-    for (let i = 0; i < NUMBER_OF_GAMES; i++) {
-
-        // get the player's selection
-        playerSelection = getPlayerSelection();
-
-        // get the computer's selection
-        computerSelection = getComputerChoice();
-        
-        // if playRound returns 0, the computer wins
-        if(playRound(playerSelection, computerSelection) === 0) {
-            console.log("You Lose! " + computerSelection + " beats " + playerSelection);
-            computerWins++;
-        }
-        else if (playRound(playerSelection, computerSelection) === 1) {
-            console.log("You Win! " + playerSelection + " beats " + computerSelection);
-            playerWins++;
-        }
-        else {
-            console.log("Draw!");
-        }
+    let initRound = function () {
+        gameResult = playRound(playerSelection, computerSelection);
+        endRound();
     }
 
-    displayWinner(playerWins, computerWins);
+    let endRound = function () {
+        // display winner of the round
+        displayRoundWinner(gameResult, computerSelection, playerSelection);
+        // update scores
+        playerWins = gameResult === 1 ? playerWins + 1 : playerWins;
+        computerWins = gameResult === 0 ? computerWins + 1 : computerWins;
+        draws = gameResult === 2 ? draws + 1 : draws;
+        // generate new choice
+        computerSelection = getComputerChoice();
+        // check if end of game
+        if (playerWins + computerWins + draws >= NUMBER_OF_GAMES) {
+            endGame();
+        }
+    };
+
+    let endGame = function () {
+        // clean up event listeners
+        rockButton.removeEventListener("click", initRound);
+        paperButton.removeEventListener("click", initRound);
+        scissorsButton.removeEventListener("click", initRound);
+        // display winner
+        displayWinner(playerWins, computerWins);
+    };
+
+    let playerWins = 0;
+    let computerWins = 0;
+    let draws = 0;
+    let playerSelection = "Rock";
+    let computerSelection = getComputerChoice();
+    let gameResult; // 0 - computer, 1 - player, 2 - draw
+    const NUMBER_OF_GAMES = 5;
+
+    // get buttons from DOM
+    const rockButton = document.getElementById("rock-button");
+    const paperButton = document.getElementById("paper-button");
+    const scissorsButton = document.getElementById("scissors-button");
+
+    // add event listeners to communicate a playRound() and change selection
+    rockButton.addEventListener("click", () => { playerSelection = "Rock"; });
+    rockButton.addEventListener("click", initRound);
+
+    paperButton.addEventListener("click", () => { playerSelection = "Paper"; });
+    paperButton.addEventListener("click", initRound);
+
+    scissorsButton.addEventListener("click", () => { playerSelection = "Scissors"; });
+    scissorsButton.addEventListener("click", initRound);
 }
 
 game();
