@@ -4,18 +4,32 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="css/styles.css">
         <script src="js/rock-paper-scissors.js" defer></script>
     </head>
 
     <body>
-        <div id="round-text"></div>
+        <div id="round-text">
+            Welcome to Rock-Paper-Scissors. <br />
+            Please make a selection.
+        </div>
         <div id="winner-text"></div>
 
-        <div id="player-selection"></div>
-        <div id="computer-selection"></div>
+        <div class="selection-container">
+            <div id="player-selection">?</div>
+            <div id="computer-selection">?</div>
+        </div>
 
-        <button id="rock-button">🪨</button>
-        <button id="paper-button">📜</button>
-        <button id="scissors-button">✂️</button>
+        <div class="footer-container">
+            <div class="button-container">
+                <button id="rock-button">🪨</button>
+                <button id="paper-button">📜</button>
+                <button id="scissors-button">✂️</button>
+            </div>
+
+            <footer>
+                © 2023 Quinn Johnson.
+            </footer>
+        </div>
     </body>
 </html>
